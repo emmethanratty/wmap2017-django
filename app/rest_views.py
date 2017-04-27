@@ -116,6 +116,8 @@ def token_login(request):
         return Response({"detail": "Invalid User Id of Password"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny,))
 def walks(request):
     print('in walks')
 
