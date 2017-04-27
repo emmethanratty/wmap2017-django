@@ -117,4 +117,4 @@ def token_login(request):
 
 def test(request):
     print('test worked')
-    return Response({"detail":"Just testing"}, status=status.HTTP_200_OK)
+    return Response({"detail": "Just testing"}, status=status.HTTP_200_OK)
