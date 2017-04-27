@@ -119,7 +119,10 @@ def token_login(request):
 def walks(request):
     print('in walks')
 
-    walks_json = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
+    walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
+    walks_json = walks_file.read()
     print(walks_json)
+    walk_data = list(walks_json)
+    print(walk_data)
 
     return HttpResponse(status=204)
