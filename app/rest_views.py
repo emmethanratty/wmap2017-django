@@ -4,7 +4,6 @@ import urllib
 from rest_framework import permissions
 from . import permissions as my_permissions
 from wmap2017 import settings
-
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from rest_framework import permissions, authentication, status, generics
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -17,6 +16,7 @@ from rest_framework.authtoken.models import Token
 # from rest_framework.decorators import api_view, permission_classes
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
+from django.http import HttpResponse
 
 
 class UsersList(generics.ListAPIView):
@@ -122,4 +122,4 @@ def walks(request):
     walks_json = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
     print(walks_json)
 
-    return Response({"detail": ""}, status=status.HTTP_200_OK)
+    return HttpResponse(status=204)
