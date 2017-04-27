@@ -123,6 +123,6 @@ def walks(request):
     walks_json = walks_file.read()
     print(walks_json)
     walk_data = list(walks_json)
-    print(walk_data)
+    # print(walk_data)
 
     return HttpResponse(status=204)
