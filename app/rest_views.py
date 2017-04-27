@@ -115,6 +115,6 @@ def token_login(request):
         return Response({"detail": "Invalid User Id of Password"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-def walks():
+def walks(request):
     print('in walks')
     return Response({"detail": ""}, status=status.HTTP_200_OK)
