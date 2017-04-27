@@ -113,3 +113,8 @@ def token_login(request):
             return Response({"detail": "Inactive account"}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({"detail": "Invalid User Id of Password"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+def test(request):
+    print('test worked')
+    return Response
