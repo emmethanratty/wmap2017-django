@@ -125,4 +125,4 @@ def walks(request):
     walk_data = list(walks_json)
     # print(walk_data)
 
-    return Response({'data': walks_json}, status=status.HTTP_200_OK )
+    return Response({'data': walks_json}, status=status.HTTP_200_OK)
