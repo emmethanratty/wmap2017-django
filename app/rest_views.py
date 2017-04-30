@@ -19,8 +19,7 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 from django.http import HttpResponse
 from app.models import *
-from django.core import serializers
-from django.core.serializers import serialize
+
 
 
 class UsersList(generics.ListAPIView):
@@ -149,7 +148,7 @@ def walks(request):
 
     walks_from_db = WalksDB.objects.all()
 
-    serialized_obj = serialize('json', [walks_from_db, ])
+    serialized_obj = serializers.serialize('json', [walks_from_db, ])
 
     # walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
     # walks_json = walks_file.read()
