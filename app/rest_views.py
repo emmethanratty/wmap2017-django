@@ -19,6 +19,7 @@ from django.utils.decorators import method_decorator
 from django.http import HttpResponse
 
 
+
 class UsersList(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializers.UserOtherSerializer
@@ -114,6 +115,24 @@ def token_login(request):
             return Response({"detail": "Inactive account"}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({"detail": "Invalid User Id of Password"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny,))
+def update_database(request):
+    print('in update database')
+
+    walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
+    walks_json = walks_file.read()
+    walks_file.close()
+    print(walks_json)
+
+    walks_db = walks(id=walks_json.poiID, name=walks_json.name, latitude=walks_json.latitude,
+                     longitude=walks_json.longitude, address=walks_json.address, description=walks_json.description,
+                     contactNumber=walks_json.contactNumber, imageFileName=walks_json.imageFileName)
+    walks_db.save()
+
+    return Response({}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
