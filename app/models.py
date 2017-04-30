@@ -94,7 +94,7 @@ class UserFriendGroup(models.Model):
         return "{} is a member of {}".format(self.member, self.friend_group)
 
 
-class Walks(models.Model):
+class WalksDB(models.Model):
     class Meta:
         verbose_name = "Walk"
         verbose_name_plural = "Walks"

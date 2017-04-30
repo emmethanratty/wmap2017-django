@@ -18,6 +18,7 @@ from rest_framework.authtoken.models import Token
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 from django.http import HttpResponse
+from app.models import *
 
 
 
@@ -132,9 +133,9 @@ def update_database(request):
 
     for walk in walks_json:
 
-        walks_db = walks(id=walk["poiID"], name=walk["name"], latitude=walk["latitude"],
-                         longitude=walk["longitude"], address=walk["address"], description=walk["description"],
-                         contactNumber=walk["contactNumber"], imageFileName=walk["imageFileName"])
+        walks_db = WalksDB(id=walk["poiID"], name=walk["name"], latitude=walk["latitude"], longitude=walk["longitude"],
+                           address=walk["address"], description=walk["description"],contactNumber=walk["contactNumber"],
+                           imageFileName=walk["imageFileName"])
         walks_db.save()
 
     return Response({}, status=status.HTTP_200_OK)
