@@ -125,14 +125,14 @@ def update_database(request):
     walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
     walks_json = walks_file.read()
     walks_file.close()
-    print(walks_json)
+    print(walks_file)
 
-    for walk in walks_json:
-
-        walks_db = walks(id=walk.poiID, name=walk.name, latitude=walk.latitude,
-                         longitude=walk.longitude, address=walk.address, description=walk.description,
-                         contactNumber=walk.contactNumber, imageFileName=walk.imageFileName)
-        walks_db.save()
+    # for walk in walks_file:
+    #
+    #     walks_db = walks(id=walk.poiID, name=walk.name, latitude=walk.latitude,
+    #                      longitude=walk.longitude, address=walk.address, description=walk.description,
+    #                      contactNumber=walk.contactNumber, imageFileName=walk.imageFileName)
+    #     walks_db.save()
 
     return Response({}, status=status.HTTP_200_OK)
 
