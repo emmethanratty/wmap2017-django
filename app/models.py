@@ -94,6 +94,21 @@ class UserFriendGroup(models.Model):
         return "{} is a member of {}".format(self.member, self.friend_group)
 
 
+class Walks(models.Model):
+    class Meta:
+        verbose_name = "Walk"
+        verbose_name_plural = "Walks"
+
+    id = models.BigIntegerField(default=0, primary_key=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    address = models.CharField(max_length=200, blank=True, null=True)
+    description = models.CharField(max_length=1000, blank=True, null=True)
+    contactNumber = models.CharField(max_length=200, blank=True, null=True)
+    imageFileName = models.CharField(max_length=200, blank=True, null=True)
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
