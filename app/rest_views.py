@@ -127,10 +127,10 @@ def update_database(request):
     walks_file.close()
     print(walks_json)
 
-    walks_db = walks(id=walks_json.poiID, name=walks_json.name, latitude=walks_json.latitude,
-                     longitude=walks_json.longitude, address=walks_json.address, description=walks_json.description,
-                     contactNumber=walks_json.contactNumber, imageFileName=walks_json.imageFileName)
-    walks_db.save()
+    # walks_db = walks(id=walks_json.poiID, name=walks_json.name, latitude=walks_json.latitude,
+    #                  longitude=walks_json.longitude, address=walks_json.address, description=walks_json.description,
+    #                  contactNumber=walks_json.contactNumber, imageFileName=walks_json.imageFileName)
+    # walks_db.save()
 
     return Response({}, status=status.HTTP_200_OK)
 
