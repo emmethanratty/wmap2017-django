@@ -127,14 +127,15 @@ def update_database(request):
     walks_string = walks_file.read()
     walks_file.close()
     walks_json = json.loads(walks_string)
+    print(walks_json)
     print(type(walks_json))
 
-    for walk in walks_json:
-
-        walks_db = walks(id=walk.poiID, name=walk.name, latitude=walk.latitude,
-                         longitude=walk.longitude, address=walk.address, description=walk.description,
-                         contactNumber=walk.contactNumber, imageFileName=walk.imageFileName)
-        walks_db.save()
+    # for walk in walks_json:
+    #
+    #     walks_db = walks(id=walk.poiID, name=walk.name, latitude=walk.latitude,
+    #                      longitude=walk.longitude, address=walk.address, description=walk.description,
+    #                      contactNumber=walk.contactNumber, imageFileName=walk.imageFileName)
+    #     walks_db.save()
 
     return Response({}, status=status.HTTP_200_OK)
 
