@@ -19,6 +19,7 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 from django.http import HttpResponse
 from app.models import *
+from django.forms.models import model_to_dict
 
 
 
@@ -153,4 +154,4 @@ def walks(request):
     # walks_file.close()
     # print(walks_json)
 
-    return Response({"data": walks_from_db}, status=status.HTTP_200_OK)
+    return Response({"data": model_to_dict(walks_from_db)}, status=status.HTTP_200_OK)
