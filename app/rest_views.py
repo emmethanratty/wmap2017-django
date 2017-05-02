@@ -133,9 +133,6 @@ def walks(request):
 
     # all_ratings = all_ratings(tweets, key=lambda tw: tw[0])
     for single_rating in all_ratings:
-        print(single_rating[0])
-        print(single_rating[1])
-        print(single_rating[2])
         print("Walk ID:", single_rating.walk_id)
         print("Rating:", single_rating.rating)
         print("Username:", single_rating.username)

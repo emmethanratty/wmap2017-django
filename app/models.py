@@ -113,6 +113,7 @@ class RatingDB(models.Model):
     class Meta:
         verbose_name = "Rating"
         verbose_name_plural = "Ratings"
+        ordering = ('walk_id',)
 
     username = models.CharField(max_length=200, blank=True, null=True)
     walk_id = models.BigIntegerField(default=0)
