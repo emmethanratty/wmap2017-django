@@ -160,8 +160,8 @@ def walks(request):
     r = []
     for rate in ratings_array:
         r.append({
-            id: rate[0],
-            average: rate[1]
+            id: str(rate[0]),
+            average: str(rate[1]),
         })
 
     print(ratings_array)
