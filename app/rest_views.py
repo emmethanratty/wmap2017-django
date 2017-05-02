@@ -173,7 +173,7 @@ def walks(request):
                            , imageFileName=walk["imageFileName"])
         walks_db.save()
 
-    return Response({"data": walks_string}, status=status.HTTP_200_OK)
+    return Response({"data": walks_string, "rating": r}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
