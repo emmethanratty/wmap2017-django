@@ -192,7 +192,7 @@ def walks(request):
     walks_final_json = json.dumps(w)
     print(walks_final_json)
 
-    return Response({"data": walks_string, "rating": rating_json}, status=status.HTTP_200_OK)
+    return Response({"data": walks_final_json, "rating": rating_json}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', ])
