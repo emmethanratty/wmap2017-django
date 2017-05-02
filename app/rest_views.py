@@ -146,7 +146,7 @@ def walks(request):
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny,))
 def rating(request):
-    print('in walks')
+    print('in rating')
 
     print(request.data)
     return Response({}, status=status.HTTP_200_OK)
