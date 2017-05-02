@@ -128,10 +128,10 @@ def walks(request):
     walks_string = walks_file.read()
     walks_file.close()
     walks_json = json.loads(walks_string)
-    print(walks_string)
-    print(type(walks_string))
-    print(walks_json)
-    print(type(walks_json))
+
+    all_ratings = RatingDB.objects.all()
+
+    print(all_ratings)
 
     for walk in walks_json:
 
