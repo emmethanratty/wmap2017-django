@@ -148,6 +148,11 @@ def walks(request):
 def rating(request):
     print('in rating')
 
+    rating_db = RatingDB(username=request.GET.get('rating_username'), walk_id=request.GET.get('rating_id'),
+                         rating=request.GET.get('rating'))
+
+    rating_db.save()
+
     print(request.GET.get('rating_id'))
     print(request.GET.get('rating'))
     return Response({}, status=status.HTTP_200_OK)

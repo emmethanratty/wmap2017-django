@@ -109,6 +109,17 @@ class WalksDB(models.Model):
     imageFileName = models.CharField(max_length=200, blank=True, null=True)
 
 
+class RatingDB(models.Model):
+    class Meta:
+        verbose_name = "Rating"
+        verbose_name_plural = "Ratings"
+
+    username = models.CharField(max_length=200, blank=True, null=True)
+    walk_id = models.BigIntegerField(default=0)
+    rating = models.BigIntegerField(default=0)
+
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
