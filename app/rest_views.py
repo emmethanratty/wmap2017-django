@@ -189,7 +189,8 @@ def walks(request):
             'imageFileName': str(walk.imageFileName),
         })
 
-    print(w)
+    walks_final_json = json.dumps(w)
+    print(walks_final_json)
 
     return Response({"data": walks_string, "rating": rating_json}, status=status.HTTP_200_OK)
 
