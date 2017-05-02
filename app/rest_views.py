@@ -122,12 +122,21 @@ def token_login(request):
 @permission_classes((permissions.AllowAny,))
 def walks(request):
     print('in walks')
-    print('Added Walks')
 
-    walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
-    walks_string = walks_file.read()
-    walks_file.close()
-    walks_json = json.loads(walks_string)
+    try:
+        walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
+        walks_string = walks_file.read()
+        walks_file.close()
+        walks_json = json.loads(walks_string)
+
+        for walk in walks_json:
+
+            walks_db = WalksDB(id=walk["poiID"], name=walk["name"], latitude=walk["latitude"], longitude=walk["longitude"],
+                               address=walk["address"], description=walk["description"], contactNumber=walk["contactNumber"]
+                               , imageFileName=walk["imageFileName"])
+            walks_db.save()
+    except:
+        print("API Error")
 
     all_ratings = RatingDB.objects.all()
 
@@ -137,9 +146,6 @@ def walks(request):
     count = 0
     total = 0
 
-    print(walks_id)
-
-    # all_ratings = all_ratings(tweets, key=lambda tw: tw[0])
     for single_rating in all_ratings:
         if walks_id != single_rating.walk_id:
 
@@ -168,12 +174,22 @@ def walks(request):
 
     print(rating_json)
 
-    for walk in walks_json:
+    all_walks = RatingDB.objects.all()
 
-        walks_db = WalksDB(id=walk["poiID"], name=walk["name"], latitude=walk["latitude"], longitude=walk["longitude"],
-                           address=walk["address"], description=walk["description"], contactNumber=walk["contactNumber"]
-                           , imageFileName=walk["imageFileName"])
-        walks_db.save()
+    w = []
+    for walk in all_walks:
+        w.append({
+            'id': str(walk.id),
+            'name': str(walk.name),
+            'latitude': str(walk.latitude),
+            'longitude': str(walk.longitude),
+            'address': str(walk.address),
+            'description': str(walk.description),
+            'contactNumber': str(walk.contact_number),
+            'imageFileName': str(walk.imageFileName),
+        })
+
+    print(w)
 
     return Response({"data": walks_string, "rating": rating_json}, status=status.HTTP_200_OK)
 
