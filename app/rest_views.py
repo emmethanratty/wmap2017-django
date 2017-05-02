@@ -134,14 +134,27 @@ def walks(request):
     ratings_array = []
     first_rating = all_ratings.first()
     walks_id = first_rating.walk_id
+    count = 0
+    total = 0
 
     print(walks_id)
 
     # all_ratings = all_ratings(tweets, key=lambda tw: tw[0])
     for single_rating in all_ratings:
-        print("Walk ID:", single_rating.walk_id)
-        print("Rating:", single_rating.rating)
-        print("Username:", single_rating.username)
+        if walks_id != single_rating.walk_id:
+
+            average = total/count
+            ratings = [walks_id, average]
+
+            ratings_array.append(ratings)
+            count = 0
+            total = 0
+            walks_id = single_rating.walk_id
+
+        total += int(single_rating.rating)
+        count += 1
+
+    print(ratings_array)
 
     for walk in walks_json:
 
