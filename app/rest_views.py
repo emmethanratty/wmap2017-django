@@ -174,7 +174,7 @@ def walks(request):
 
     print(rating_json)
 
-    all_walks = RatingDB.objects.all()
+    all_walks = WalksDB.objects.all()
 
     w = []
     for walk in all_walks:
