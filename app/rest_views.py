@@ -179,7 +179,7 @@ def walks(request):
     w = []
     for walk in all_walks:
         w.append({
-            'id': str(walk.id),
+            'poiID': str(walk.id),
             'name': str(walk.name),
             'latitude': str(walk.latitude),
             'longitude': str(walk.longitude),
