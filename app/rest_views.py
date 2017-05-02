@@ -132,11 +132,9 @@ def walks(request):
     all_ratings = RatingDB.objects.all()
 
     ratings_array = []
-    walks_id = all_ratings[0][0]
+    walks_id = all_ratings.first()
 
-    print(walks_id)
-
-
+    print(walks_id.walk_id)
 
     # all_ratings = all_ratings(tweets, key=lambda tw: tw[0])
     for single_rating in all_ratings:
