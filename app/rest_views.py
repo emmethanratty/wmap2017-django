@@ -180,10 +180,10 @@ def walks(request):
     for walk in all_walks:
         w.append({
             'poiID': str(walk.id),
-            'name': str(walk.name),
+            'name': walk.name,
             'latitude': str(walk.latitude),
             'longitude': str(walk.longitude),
-            'address': str(walk.address),
+            'address': walk.address,
             'description': walk.description,
             'contactNumber': str(walk.contactNumber),
             'imageFileName': str(walk.imageFileName),
