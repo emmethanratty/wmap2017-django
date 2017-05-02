@@ -133,7 +133,7 @@ def walks(request):
 
     ratings_array = []
     first_rating = all_ratings.first()
-    walks_id = first_rating.walks_id
+    walks_id = first_rating.walk_id
 
     print(walks_id)
 
