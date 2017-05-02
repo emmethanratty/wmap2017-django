@@ -131,7 +131,9 @@ def walks(request):
 
     all_ratings = RatingDB.objects.all()
 
-    print(all_ratings)
+    for single_rating in all_ratings:
+        print("Walk ID:", single_rating.walk_id)
+        print("Rating:", single_rating.rating)
 
     for walk in walks_json:
 
