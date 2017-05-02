@@ -151,7 +151,7 @@ def walks(request):
             total = 0
             walks_id = single_rating.walk_id
 
-        total += int(single_rating.rating)
+        total += float(single_rating.rating)
         count += 1
 
     ratings = [walks_id, total/count]
@@ -160,8 +160,8 @@ def walks(request):
     r = []
     for rate in ratings_array:
         r.append({
-            id: str(rate[0]),
-            average: str(rate[1]),
+            'id': str(rate[0]),
+            'average': str(rate[1]),
         })
 
     print(ratings_array)
