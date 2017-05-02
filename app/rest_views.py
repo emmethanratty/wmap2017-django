@@ -148,5 +148,5 @@ def walks(request):
 def rating(request):
     print('in rating')
 
-    print(request.data)
+    print(request)
     return Response({}, status=status.HTTP_200_OK)
