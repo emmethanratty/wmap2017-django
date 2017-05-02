@@ -185,7 +185,7 @@ def walks(request):
             'longitude': str(walk.longitude),
             'address': str(walk.address),
             'description': walk.description,
-            'contactNumber': str(walk.contact_number),
+            'contactNumber': str(walk.contactNumber),
             'imageFileName': str(walk.imageFileName),
         })
 
