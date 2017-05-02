@@ -154,6 +154,10 @@ def walks(request):
         total += int(single_rating.rating)
         count += 1
 
+    ratings = [walks_id, total/count]
+
+    ratings_array.append(ratings)
+
     print(ratings_array)
 
     for walk in walks_json:
