@@ -134,6 +134,7 @@ def walks(request):
     for single_rating in all_ratings:
         print("Walk ID:", single_rating.walk_id)
         print("Rating:", single_rating.rating)
+        print("Username:", single_rating.username)
 
     for walk in walks_json:
 
