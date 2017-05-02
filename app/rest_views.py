@@ -135,8 +135,9 @@ def walks(request):
                                address=walk["address"], description=walk["description"], contactNumber=walk["contactNumber"]
                                , imageFileName=walk["imageFileName"])
             walks_db.save()
-    except:
-        print("API Error")
+
+    except Exception as e:
+        print("Dub linked API Error")
 
     all_ratings = RatingDB.objects.all()
 
@@ -150,7 +151,7 @@ def walks(request):
         if walks_id != single_rating.walk_id:
 
             average = total/count
-            ratings = [walks_id, average]
+            ratings = [walks_id, "{0:.2f}".format(average)]
 
             ratings_array.append(ratings)
             count = 0
@@ -160,7 +161,7 @@ def walks(request):
         total += float(single_rating.rating)
         count += 1
 
-    ratings = [walks_id, total/count]
+    ratings = [walks_id, "{0:.2f}".format(total/count)]
 
     ratings_array.append(ratings)
     r = []
