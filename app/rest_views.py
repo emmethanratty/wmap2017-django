@@ -134,7 +134,7 @@ def walks(request):
     ratings_array = []
     walks_id = all_ratings[0][0]
 
-    print(walk_id)
+    print(walks_id)
 
 
 
