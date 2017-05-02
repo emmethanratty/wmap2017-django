@@ -131,6 +131,13 @@ def walks(request):
 
     all_ratings = RatingDB.objects.all()
 
+    ratings_array = []
+    walks_id = all_ratings[0][0]
+
+    print(walk_id)
+
+
+
     # all_ratings = all_ratings(tweets, key=lambda tw: tw[0])
     for single_rating in all_ratings:
         print("Walk ID:", single_rating.walk_id)

@@ -34,7 +34,7 @@ class User(AbstractUser):
 
 class FriendGroup(models.Model):
     class Meta:
-        verbose_name = "firends list"
+        verbose_name = "friends list"
         verbose_name_plural = "friends lists"
 
     name = models.CharField(
@@ -118,7 +118,6 @@ class RatingDB(models.Model):
     username = models.CharField(max_length=200, blank=True, null=True)
     walk_id = models.BigIntegerField(default=0)
     rating = models.BigIntegerField(default=0)
-
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
