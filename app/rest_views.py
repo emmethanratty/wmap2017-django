@@ -138,3 +138,12 @@ def walks(request):
         walks_db.save()
 
     return Response({"data": walks_string}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny,))
+def rating(request):
+    print('in walks')
+
+    print(request.id, request.rating)
+    return Response({}, status=status.HTTP_200_OK)
