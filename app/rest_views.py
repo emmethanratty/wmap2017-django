@@ -109,17 +109,21 @@ def token_login(request):
         return Response({"detail": "Invalid User Id of Password"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# function to load the walks API and input to the database, also return the data from the database to the frontend
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny,))
 def walks(request):
     print('in walks')
 
+    # try catch block in case the API page is down
     try:
+        # get the API data
         walks_file = urllib.urlopen('https://data.dublinked.ie/dataset/b1a0ce0a-bfd4-4d0b-b787-69a519c61672/resource/b38c4d25-097b-4a8f-b9be-cf6ab5b3e704/download/walk-dublin-poi-details-sample-datap20130415-1449.json')
         walks_string = walks_file.read()
         walks_file.close()
         walks_json = json.loads(walks_string)
 
+        # insert the data to the database
         for walk in walks_json:
 
             walks_db = WalksDB(id=walk["poiID"], name=walk["name"], latitude=walk["latitude"], longitude=walk["longitude"],
@@ -130,6 +134,7 @@ def walks(request):
     except Exception as e:
         print("Dub linked API Error")
 
+    # selects all ratings from the database
     all_ratings = RatingDB.objects.all()
 
     ratings_array = []
@@ -138,7 +143,9 @@ def walks(request):
     count = 0
     total = 0
 
+    # loop to get the average for each walk
     for single_rating in all_ratings:
+        # when the id changes the average is appended to an array
         if walks_id != single_rating.walk_id:
 
             average = total/count
@@ -156,19 +163,22 @@ def walks(request):
 
     ratings_array.append(ratings)
     r = []
+
+    # for loop to create the objects, to pass back to the frontend
     for rate in ratings_array:
         r.append({
             'id': str((rate[0])),
             'average': str((rate[1])),
         })
 
+    # making the rating object list into JSON
     rating_json = json.dumps(r)
 
-    print(rating_json)
-
+    # get all the walks information from the database
     all_walks = WalksDB.objects.all()
 
     w = []
+    # loop to create the object data for walks, to pass to frontend
     for walk in all_walks:
         w.append({
             'poiID': str(walk.id),
@@ -181,12 +191,14 @@ def walks(request):
             'imageFileName': str(walk.imageFileName),
         })
 
+    # change the objects into JSON
     walks_final_json = json.dumps(w)
     print(walks_final_json)
 
     return Response({"data": walks_final_json, "rating": rating_json}, status=status.HTTP_200_OK)
 
 
+# function to insert the ratings into the RatingDB
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny,))
 def rating(request):
@@ -202,12 +214,16 @@ def rating(request):
     return Response({}, status=status.HTTP_200_OK)
 
 
+# function to return all the rating data to the front end
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny,))
 def listreviews(request):
+
+    # get all the rating data from the database
     all_ratings = RatingDB.objects.filter(walk_id=request.GET.get('walk_id'))
     r = []
 
+    # loop to convert data into objects
     for rate in all_ratings:
         r.append({
             'id': rate.walk_id,
@@ -215,34 +231,33 @@ def listreviews(request):
             'rating': rate.rating,
         })
 
+    # change the objects into JSON to pass to frontend
     rating_json = json.dumps(r)
-
-    print(rating_json)
 
     return Response({'rating_list': rating_json}, status=status.HTTP_200_OK)
 
 
+# function to register a user into the database
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny,))
 @csrf_exempt
 def registration(request):
+
+    # get all information from the request
     username = request.GET.get('username')
     first_name = request.GET.get('first_name')
     last_name = request.GET.get('last_name')
     email = request.GET.get('email')
     password = request.GET.get('password')
 
-    print("username: " + username)
-    print("first_name: " + first_name)
-    print("last_name: " + last_name)
-    print("email: " + email)
-    print("password: " + password)
-
+    # try to check if user is in the database already
     try:
         user = get_user_model().objects.get(username=username)
         if user:
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
     except get_user_model().DoesNotExist:
+
+        # create and insert the new user model
         user = get_user_model().objects.create_user(username=username)
         # Set user fields provided
         user.set_password(password)
