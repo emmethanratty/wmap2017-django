@@ -235,11 +235,11 @@ def listreviews(request):
 @permission_classes((permissions.AllowAny,))
 @csrf_exempt
 def registration(request):
-    username = request.GET['username']
-    first_name = request.GET['first_name']
-    last_name = request.GET['last_name']
-    email = request.GET['email']
-    password = request.GET['password']
+    username = request.GET.get('username')
+    first_name = request.GET.get('first_name')
+    last_name = request.GET.get('last_name')
+    email = request.GET.get('email')
+    password = request.GET.get('password')
 
     print("username: " + username)
     print("first_name: " + first_name)
