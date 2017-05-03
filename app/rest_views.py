@@ -229,3 +229,19 @@ def listreviews(request):
     print(rating_json)
 
     return Response({'rating_list': rating_json}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny,))
+def registration(request):
+    username = request.GET['username']
+    first_name = request.GET['first_name']
+    last_name = request.GET['last_name']
+    email = request.GET['email']
+    password = request.GET['password']
+
+    print("username: " + username)
+    print("first_name: " + first_name)
+    print("last_name: " + last_name)
+    print("email: " + email)
+    print("password: " + password)
