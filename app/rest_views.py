@@ -233,6 +233,7 @@ def listreviews(request):
 
 @api_view(['GET', ])
 @permission_classes((permissions.AllowAny,))
+@csrf_exempt
 def registration(request):
     username = request.GET['username']
     first_name = request.GET['first_name']
@@ -245,3 +246,5 @@ def registration(request):
     print("last_name: " + last_name)
     print("email: " + email)
     print("password: " + password)
+
+    return Response({}, status=status.HTTP_200_OK)
