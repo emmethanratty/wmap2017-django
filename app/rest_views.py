@@ -209,3 +209,23 @@ def rating(request):
     print(request.GET.get('rating_id'))
     print(request.GET.get('rating'))
     return Response({}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', ])
+@permission_classes((permissions.AllowAny,))
+def listreviews(request):
+    all_ratings = RatingDB.objects.filter(walk_id=request.GET.get('walk_id'))
+    r = []
+
+    for rate in all_ratings:
+        r.append({
+            'id': rate.walk_id,
+            'username': rate.username,
+            'rating': rate.rating,
+        })
+
+    rating_json = json.dumps(r)
+
+    print(rating_json)
+
+    return Response({'rating_list': rating_json}, status=status.HTTP_200_OK)
