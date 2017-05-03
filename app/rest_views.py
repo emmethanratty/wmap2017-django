@@ -247,4 +247,18 @@ def registration(request):
     print("email: " + email)
     print("password: " + password)
 
-    return Response({}, status=status.HTTP_200_OK)
+    try:
+        user = get_user_model().objects.get(username=username)
+        if user:
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
+    except get_user_model().DoesNotExist:
+        user = get_user_model().objects.create_user(username=username)
+        # Set user fields provided
+        user.set_password(password)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+        return Response({}, status=status.HTTP_200_OK)
+
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
